@@ -17,3 +17,5 @@ class Chapter(scrapy.Item):
     modified_by = scrapy.Field()
     modified_on = scrapy.Field()
     is_deleted = scrapy.Field()
+    collection_name = scrapy.Field()
+    story_name = scrapy.Field()

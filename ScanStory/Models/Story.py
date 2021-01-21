@@ -28,3 +28,4 @@ class Story(scrapy.Item):
     source = scrapy.Field()
     author = scrapy.Field()
     genre = scrapy.Field()
+    collection_name = scrapy.Field()

@@ -6,6 +6,7 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 import pymongo
 from itemadapter import ItemAdapter
+from bson.json_util import loads, dumps
 
 
 class ScanstoryPipeline(object):
@@ -14,9 +15,10 @@ class ScanstoryPipeline(object):
 
 
 class MongoPipeline:
-    collection_name = 'scanstory'
+    collection_name = 'story'
 
     def __init__(self, mongo_uri, mongo_db):
+
         self.mongo_uri = mongo_uri
         self.mongo_db = mongo_db
 
@@ -30,10 +32,26 @@ class MongoPipeline:
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_uri)
         self.db = self.client[self.mongo_db]
+        if hasattr(spider, 'collection_name'):
+            self.collection_name = spider.collection_name
 
     def close_spider(self, spider):
         self.client.close()
 
     def process_item(self, item, spider):
-        self.db[self.collection_name].insert_one(ItemAdapter(item).asdict())
+        story_name = item["story_name"]
+        collection_name = item["collection_name"]
+        record = self.db[collection_name].find_one({"story_name": story_name})
+        json_str = dumps(record)
+        result = loads(json_str)
+        print(f"record _id: {result['_id']}")
+        if collection_name == "story":
+            if not record:
+                self.db[collection_name].insert_one(ItemAdapter(item).asdict())
+        elif collection_name == "chapter":
+            chapter_title = item["chapter_title"]
+            chapter = self.db[collection_name].find_one({"story_name": story_name, "chapter_title": chapter_title})
+            if not chapter:
+                item['story_id'] = result['_id']
+                self.db[collection_name].insert_one(ItemAdapter(item).asdict())
         return item

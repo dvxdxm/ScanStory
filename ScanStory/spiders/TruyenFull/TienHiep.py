@@ -4,17 +4,42 @@ import os
 from pathlib import Path
 import scrapy
 from ScanStory.Models.Story import Story
+from ScanStory.Models.Chapter import Chapter
 
 
 def download_image_to_link(link):
-    print(f'Scan download image:{link}')
+    # print(f'Scan download image:{link}')
     yield scrapy.Request(link)
 
 
 def parse_to_link(link):
-    print(f'Current url: {link}')
+    # print(f'Current url: {link}')
     request = scrapy.Request(link, callback=get_content_to_url)
     return request
+
+
+def get_content_of_chapter(link, story_name):
+    request = scrapy.Request(link, callback=get_content_chapter, cb_kwargs=dict(story_name=story_name))
+    return request
+
+
+def get_content_chapter(response, story_name):
+    item = Chapter()
+    content = response.xpath('//div[@id="chapter-c" and not(contains(@class, "ads-network"))]').get()
+    print(f"content: {content}")
+    chapter_title = response.xpath('//a[contains(@class, "chapter-title")]/@title').get()
+    text_replace = story_name + " - "
+    text_after_replace = chapter_title.replace(f"{text_replace}", "")
+
+    item['content'] = content
+    item["collection_name"] = 'chapter'
+    item["chapter_title"] = text_after_replace
+    item["story_name"] = story_name
+    item['created_by'] = "admin"
+    item['created_on'] = datetime.datetime.now()
+    item['modified_on'] = datetime.datetime.now()
+    item['modified_by'] = "admin"
+    yield item
 
 
 def get_content_to_url(response):
@@ -30,7 +55,13 @@ def get_content_to_url(response):
     genre = response.xpath('//div[contains(@class, "info")]//a[contains(@itemprop, "genre")]/text()').getall()
     list_chapter = response.xpath('//ul[contains(@class, "list-chapter")]//a/@title').getall()
     list_urls_chapter = response.xpath('//ul[contains(@class, "list-chapter")]//a/@href').getall()
+    # Get content of chapters
+    if len(list_urls_chapter) > 0:
+        for link_url in list_urls_chapter:
+            yield get_content_of_chapter(link_url, story_name)
+
     after_replace_list_chapter = []
+    # Get list name of chapters
     for lc in list_chapter:
         text_replace = story_name + " - "
         after_replace = lc.replace(f"{text_replace}", "")
@@ -51,6 +82,7 @@ def get_content_to_url(response):
     item["is_deleted"] = 0
     item["hidden"] = 1
     item["list_chapter"] = after_replace_list_chapter
+    item["collection_name"] = 'story'
 
     yield item
 
@@ -62,6 +94,7 @@ class TienHiep(scrapy.Spider):
     links = []
     FOLDER = Path(__file__).absolute().parent.parent.parent
     my_file = os.path.join(FOLDER, 'assets\TienHiep')
+
     with open(my_file) as json_file:
         data = json.load(json_file)
         start_urls = data['CategoryUrls']
