@@ -12,13 +12,24 @@ def download_image_to_link(link):
     yield scrapy.Request(link)
 
 
-def parse_to_link(link):
+def request_get_list_chapters(link):
+    res = yield scrapy.Request(link, callback=response_list_chapters)
+    return res
+
+
+def response_list_chapters(response):
+    list_urls_chapter = response.xpath('//ul[contains(@class, "list-chapter")]//a/@href').getall()
+
+    return list_urls_chapter
+
+
+def request_get_content_story(link):
     # print(f'Current url: {link}')
-    request = scrapy.Request(link, callback=get_content_to_url)
+    request = scrapy.Request(link, callback=get_content_story_to_url, cb_kwargs=dict(link=link))
     return request
 
 
-def get_content_of_chapter(link, story_name):
+def request_get_content_of_chapter(link, story_name):
     request = scrapy.Request(link, callback=get_content_chapter, cb_kwargs=dict(story_name=story_name))
     return request
 
@@ -42,7 +53,7 @@ def get_content_chapter(response, story_name):
     yield item
 
 
-def get_content_to_url(response):
+def get_content_story_to_url(response, link):
     item = Story()
     avatarPath = response.xpath('//div[contains(@class,"book")]//img/@src').get()
     # if avatarPath != None & avatarPath != '':
@@ -55,13 +66,38 @@ def get_content_to_url(response):
     genre = response.xpath('//div[contains(@class, "info")]//a[contains(@itemprop, "genre")]/text()').getall()
     list_chapter = response.xpath('//ul[contains(@class, "list-chapter")]//a/@title').getall()
     list_urls_chapter = response.xpath('//ul[contains(@class, "list-chapter")]//a/@href').getall()
+    last_page_text = response.xpath('//ul[contains(@class, "pagination")]//li[not(contains(@class,"active"))]//a[text('
+                                    ')="Cuối "]/@title').get()
+
+    if last_page_text:
+        text_replace_page = story_name + " - Trang "
+        replace_last_page_text = last_page_text.replace(text_replace_page, "")
+        if int(replace_last_page_text) > 0:
+            for index in range(int(replace_last_page_text)):
+                link_to_page = link + "trang-" + str(index+1)
+                print(f"link_to_page: {link_to_page}")
+                # TODO: get list chapters
+                new_list_chapters = request_get_list_chapters(link_to_page)
+                print(f"new_list_chapters: {new_list_chapters}")
+
+    else:
+        list_pages = response.xpath('//ul[contains(@class, "pagination")]//li[not(contains(@class,"active"))]//a[not('
+                                    'span)]/text()').getall()
+        if len(list_pages) > 0:
+            number_index_pages = list_pages[len(list_pages) - 1]
+            for index in range(int(number_index_pages)):
+                print(f"index: {index}")
+                # TODO: get list chapters
+
     # Get content of chapters
-    if len(list_urls_chapter) > 0:
-        for link_url in list_urls_chapter:
-            yield get_content_of_chapter(link_url, story_name)
+    # TODO: get list chapter theo trang
+    # if len(list_urls_chapter) > 0:
+    #    for link_url in list_urls_chapter:
+    #        yield request_get_content_of_chapter(link_url, story_name)
 
     after_replace_list_chapter = []
     # Get list name of chapters
+    # TODO: get list chapter theo trang
     for lc in list_chapter:
         text_replace = story_name + " - "
         after_replace = lc.replace(f"{text_replace}", "")
@@ -106,4 +142,4 @@ class TienHiep(scrapy.Spider):
 
         if len(get_links) > 0:
             for link in get_links:
-                yield parse_to_link(link)
+                yield request_get_content_story(link)

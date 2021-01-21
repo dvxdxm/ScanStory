@@ -44,7 +44,7 @@ class MongoPipeline:
         record = self.db[collection_name].find_one({"story_name": story_name})
         json_str = dumps(record)
         result = loads(json_str)
-        print(f"record _id: {result['_id']}")
+        # print(f"record _id: {result['_id']}")
         if collection_name == "story":
             if not record:
                 self.db[collection_name].insert_one(ItemAdapter(item).asdict())
