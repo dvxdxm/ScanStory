@@ -64,10 +64,14 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'ScanStory.pipelines.ScanstoryPipeline': 300,
-#}
-
+ITEM_PIPELINES = {
+    'ScanStory.pipelines.ScanstoryPipeline': 300,
+    # 'scrapy.pipelines.images.ImagesPipeline': 1,
+    'ScanStory.pipelines.MongoPipeline': 300,
+    # 'stack.pipelines.MongoDBPipeline': 300
+}
+# IMAGES_STORE = '../scanstory/assets/img/'
+# MEDIA_ALLOW_REDIRECTS = True
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
@@ -88,3 +92,9 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+MONGODB_SERVER = "localhost"
+MONGO_URI = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "scanstory"
+MONGO_DATABASE = "scanstory"
+MONGODB_COLLECTION = "scanstory"
