@@ -29,3 +29,5 @@ class Story(scrapy.Item):
     author = scrapy.Field()
     genre = scrapy.Field()
     collection_name = scrapy.Field()
+    keywords = scrapy.Field()
+    description_seo = scrapy.Field()

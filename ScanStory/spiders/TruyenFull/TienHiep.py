@@ -8,36 +8,34 @@ from ScanStory.Models.Chapter import Chapter
 
 
 def download_image_to_link(link):
-    # print(f'Scan download image:{link}')
     yield scrapy.Request(link)
 
 
-def request_get_list_chapters(link):
-    res = yield scrapy.Request(link, callback=response_list_chapters)
-    return res
-
-
-def response_list_chapters(response):
+def response_list_chapters(response, story_name, sort):
     list_urls_chapter = response.xpath('//ul[contains(@class, "list-chapter")]//a/@href').getall()
+    if len(list_urls_chapter) > 0:
 
-    return list_urls_chapter
+        for link_url in list_urls_chapter:
+            sort += 1
+            print(f"Count item: {sort}")
+            yield request_get_content_of_chapter(link_url, story_name, sort)
 
 
 def request_get_content_story(link):
-    # print(f'Current url: {link}')
     request = scrapy.Request(link, callback=get_content_story_to_url, cb_kwargs=dict(link=link))
     return request
 
 
-def request_get_content_of_chapter(link, story_name):
-    request = scrapy.Request(link, callback=get_content_chapter, cb_kwargs=dict(story_name=story_name))
+def request_get_content_of_chapter(link, story_name, sort):
+
+    request = scrapy.Request(link, callback=get_content_chapter, cb_kwargs=dict(story_name=story_name, sort=sort))
     return request
 
 
-def get_content_chapter(response, story_name):
+def get_content_chapter(response, story_name, sort):
     item = Chapter()
     content = response.xpath('//div[@id="chapter-c" and not(contains(@class, "ads-network"))]').get()
-    print(f"content: {content}")
+
     chapter_title = response.xpath('//a[contains(@class, "chapter-title")]/@title').get()
     text_replace = story_name + " - "
     text_after_replace = chapter_title.replace(f"{text_replace}", "")
@@ -50,24 +48,35 @@ def get_content_chapter(response, story_name):
     item['created_on'] = datetime.datetime.now()
     item['modified_on'] = datetime.datetime.now()
     item['modified_by'] = "admin"
+    item['story_id'] = ""
+    item['sort_number'] = sort
     yield item
 
 
 def get_content_story_to_url(response, link):
     item = Story()
     avatarPath = response.xpath('//div[contains(@class,"book")]//img/@src').get()
-    # if avatarPath != None & avatarPath != '':
-    #    yield download_image_to_link(avatarPath)
     story_name = response.xpath('//h3[contains(@class,"title")]/text()').get()
     description = response.xpath('//div[contains(@class, "desc-text")]').get()
     source = response.xpath('//span[contains(@class, "source")]/text()').get()
     status = response.xpath('//span[contains(@class, "text-primary")]/text()').get()
     author = response.xpath('//div[contains(@class, "info")]//a[contains(@itemprop, "author")]/text()').get()
     genre = response.xpath('//div[contains(@class, "info")]//a[contains(@itemprop, "genre")]/text()').getall()
-    list_chapter = response.xpath('//ul[contains(@class, "list-chapter")]//a/@title').getall()
+    keywords = response.xpath('//meta[contains(@name, "keywords")]/@content').get()
+    description_seo = response.xpath('//meta[contains(@name, "description")]/@content').get()
+    # get cac chapter o page 1 theo title
+    # list_chapter = response.xpath('//ul[contains(@class, "list-chapter")]//a/@title').getall()
+    # get cac chapter o page 1
     list_urls_chapter = response.xpath('//ul[contains(@class, "list-chapter")]//a/@href').getall()
+    # check story co nhieu chapters hay khoong?
     last_page_text = response.xpath('//ul[contains(@class, "pagination")]//li[not(contains(@class,"active"))]//a[text('
                                     ')="Cuối "]/@title').get()
+    sort_index = 0
+
+    if len(list_urls_chapter) > 0:
+        for link_url in list_urls_chapter:
+            sort_index = sort_index + 1
+            yield request_get_content_of_chapter(link_url, story_name, sort_index)
 
     if last_page_text:
         text_replace_page = story_name + " - Trang "
@@ -75,10 +84,9 @@ def get_content_story_to_url(response, link):
         if int(replace_last_page_text) > 0:
             for index in range(int(replace_last_page_text)):
                 link_to_page = link + "trang-" + str(index+1)
-                print(f"link_to_page: {link_to_page}")
-                # TODO: get list chapters
-                new_list_chapters = request_get_list_chapters(link_to_page)
-                print(f"new_list_chapters: {new_list_chapters}")
+                sort = 50*index
+                print(f"sort item: {sort}")
+                yield scrapy.Request(link_to_page, callback=response_list_chapters, cb_kwargs=dict(story_name=story_name, sort=sort))
 
     else:
         list_pages = response.xpath('//ul[contains(@class, "pagination")]//li[not(contains(@class,"active"))]//a[not('
@@ -86,22 +94,9 @@ def get_content_story_to_url(response, link):
         if len(list_pages) > 0:
             number_index_pages = list_pages[len(list_pages) - 1]
             for index in range(int(number_index_pages)):
-                print(f"index: {index}")
-                # TODO: get list chapters
-
-    # Get content of chapters
-    # TODO: get list chapter theo trang
-    # if len(list_urls_chapter) > 0:
-    #    for link_url in list_urls_chapter:
-    #        yield request_get_content_of_chapter(link_url, story_name)
-
-    after_replace_list_chapter = []
-    # Get list name of chapters
-    # TODO: get list chapter theo trang
-    for lc in list_chapter:
-        text_replace = story_name + " - "
-        after_replace = lc.replace(f"{text_replace}", "")
-        after_replace_list_chapter.append(after_replace)
+                link_to_page = link + "trang-" + str(index + 1)
+                sort = 50*index
+                yield scrapy.Request(link_to_page, callback=response_list_chapters, cb_kwargs=dict(story_name=story_name, sort=sort))
 
     # item save db
     item['story_name'] = story_name
@@ -117,29 +112,41 @@ def get_content_story_to_url(response, link):
     item['modified_by'] = "admin"
     item["is_deleted"] = 0
     item["hidden"] = 1
-    item["list_chapter"] = after_replace_list_chapter
     item["collection_name"] = 'story'
-
+    item["keywords"] = keywords
+    item["description_seo"] = description_seo
     yield item
+
+
+def get_list_genre(response):
+    get_links = response.xpath('//h3[@class="truyen-title"]//a/@href').getall()
+
+    if len(get_links) > 0:
+        for link in get_links:
+            yield request_get_content_story(link)
 
 
 class TienHiep(scrapy.Spider):
     name = 'tienhiep'
     allowed_domains = ['truyenfull.vn']
-    start_urls = []
-    links = []
-    FOLDER = Path(__file__).absolute().parent.parent.parent
-    my_file = os.path.join(FOLDER, 'assets\TienHiep')
+    start_urls = ['https://truyenfull.vn/the-loai/tien-hiep/']
+    # links = []
+    # FOLDER = Path(__file__).absolute().parent.parent.parent
+    # my_file = os.path.join(FOLDER, 'assets\TienHiep')
+    the_loai = 'Tiên Hiệp'
 
-    with open(my_file) as json_file:
-        data = json.load(json_file)
-        start_urls = data['CategoryUrls']
+    # with open(my_file) as json_file:
+    #    data = json.load(json_file)
+    #    start_urls = data['CategoryUrls']
 
     def parse(self, response):
-        get_links = response.xpath('//h3[@class="truyen-title"]//a/@href').getall()
-        for link in get_links:
-            self.links.append(link)
-
-        if len(get_links) > 0:
-            for link in get_links:
-                yield request_get_content_story(link)
+        last_page_text = response.xpath(
+            '//ul[contains(@class, "pagination")]//li[not(contains(@class,"active"))]//a[text('
+            ')="Cuối "]/@title').get()
+        if last_page_text:
+            text_replace_page = self.the_loai + " - Trang "
+            replace_last_page_text = last_page_text.replace(text_replace_page, "")
+            if int(replace_last_page_text) > 0:
+                for index in range(int(replace_last_page_text)):
+                    link_to_page = self.start_urls[0] + "trang-" + str(index)
+                    yield scrapy.Request(link_to_page, callback=get_list_genre)

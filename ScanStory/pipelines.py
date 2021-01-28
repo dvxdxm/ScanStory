@@ -52,6 +52,9 @@ class MongoPipeline:
             chapter_title = item["chapter_title"]
             chapter = self.db[collection_name].find_one({"story_name": story_name, "chapter_title": chapter_title})
             if not chapter:
-                item['story_id'] = result['_id']
-                self.db[collection_name].insert_one(ItemAdapter(item).asdict())
+                adapter = ItemAdapter(item)
+                if result:
+                    adapter['story_id'] = result['_id']
+
+                self.db[collection_name].insert_one(adapter.asdict())
         return item
