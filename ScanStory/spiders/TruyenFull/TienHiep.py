@@ -5,7 +5,7 @@ from pathlib import Path
 import scrapy
 from ScanStory.Models.Story import Story
 from ScanStory.Models.Chapter import Chapter
-
+from slugify import slugify
 
 def download_image_to_link(link):
     yield scrapy.Request(link)
@@ -50,6 +50,7 @@ def get_content_chapter(response, story_name, sort):
     item['modified_by'] = "admin"
     item['story_id'] = ""
     item['sort_number'] = sort
+    item["slug"] = slugify(text_after_replace).lower()
     yield item
 
 
@@ -115,6 +116,7 @@ def get_content_story_to_url(response, link):
     item["collection_name"] = 'story'
     item["keywords"] = keywords
     item["description_seo"] = description_seo
+    item["slug"] = slugify(story_name).lower()
     yield item
 
 

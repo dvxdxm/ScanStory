@@ -31,3 +31,4 @@ class Story(scrapy.Item):
     collection_name = scrapy.Field()
     keywords = scrapy.Field()
     description_seo = scrapy.Field()
+    slug = scrapy.Field()

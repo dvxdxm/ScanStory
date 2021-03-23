@@ -3,46 +3,38 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    @*<title>Đọc truyện online,truyện đọc hay</title>*@
     <title>@ViewData["Title"] - truyendochay</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <meta name="description"
+          content="Đọc truyện online, đọc truyện chữ, truyện hay, truyện đọc hay. Truyện Đọc Hay luôn tổng hợp và cập nhật các chương truyện một cách nhanh nhất.">
+    <meta name="keywords" content="doc truyen, doc truyen online, truyen hay, truyen chu">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="canonical" href="http://truyendochay.com/" />
+    <link as="font" crossorigin="crossorigin" type="font/woff" href="~/fonts/Roboto-Regular.woff" />
+    <link as="font" crossorigin="crossorigin" type="font/woff" href="~/fonts/RobotoCondensed-Regular.woff" />
+    @*<title>@ViewData["Title"] - truyendochay</title>*@
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    <link rel="stylesheet" as="style" type="text/css" href="~/css/style.css" />
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">truyendochay</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+<body id="body_home" class="dark-theme">
+    <div id="wrap">
+        <header>
+            @await Html.PartialAsync("_Header")
+        </header>
+        <main>
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - truyendochay - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <footer">
+        @await Html.PartialAsync("_Footer")
+    </footer">
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+        @await RenderSectionAsync("Scripts", required: false)
+        
 </body>
 </html>

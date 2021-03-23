@@ -11,15 +11,14 @@ using truyendochay.Services;
 
 namespace truyendochay.Controllers
 {
-    public class HomeController : Controller
+    public class ChaptersController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<ChaptersController> _logger;
         private readonly ScanStoryService _scanStoryService;
-        private readonly int page = 21;
+        private readonly int page = 50;
         private readonly int pageIndex = 0;
         private readonly IHostingEnvironment _environment;
-
-        public HomeController(ILogger<HomeController> logger, ScanStoryService scanStoryService, IHostingEnvironment environment)
+        public ChaptersController(ILogger<ChaptersController> logger, ScanStoryService scanStoryService, IHostingEnvironment environment)
         {
             _logger = logger;
             _scanStoryService = scanStoryService;
@@ -27,7 +26,7 @@ namespace truyendochay.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.Client, NoStore = true)]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromRoute] string slug)
         {
             var model = new HomePage();
             var categories = await _scanStoryService.getCategoriesStory();
@@ -56,27 +55,15 @@ namespace truyendochay.Controllers
                     listStories = await _scanStoryService.getCategories();
                 }
             }
+            //get story
+            var story = _scanStoryService.GetStory(slug);
+           
 
-            model.Chapters = _scanStoryService.GetChapters(pageIndex, page);
-            model.Stories = _scanStoryService.GetStories(pageIndex, 13);
-            model.CategoryStories = categories.ConvertAll<CategoryStoryViewModel>(s => s.Convert());
             model.ListStories = listStories.ConvertAll<CategoryViewModel>(s => s.Convert());
-            model.StoriesFull = _scanStoryService.SearchTruyenFull(pageIndex, 12);
-            //truyen mới cập nhật
-            model.NewChaptersUpdate = _scanStoryService.NewChaptersUpdate(pageIndex, page);
+            model.CategoryStories = categories.ConvertAll<CategoryStoryViewModel>(s => s.Convert());
+            
+            model.Story = story;
             return View(model);
         }
-
-        [HttpGet("tim-kiem")]
-        public JsonResult Search(string textSearch = null)
-        {
-            var datas = _scanStoryService.Search(textSearch, pageIndex, 5);
-            return Json(datas);
-        }
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
     }
 }

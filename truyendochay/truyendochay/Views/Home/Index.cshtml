@@ -1,8 +1,211 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using truyendochay.Utils
+@{
+    ViewData["Title"] = "Đọc truyện online,truyện đọc hay";
 }
+@model HomePage
+<div class="container" id="intro-index">
+    <div class="title-list">
+        <h2><a href="https://truyenfull.vn/danh-sach/truyen-hot/" title="Truyện hot">Truyện hot</a></h2><a href="https://truyenfull.vn/danh-sach/truyen-hot/" title="Truyện hot">
+            <span class="glyphicon glyphicon-fire"></span>
+        </a><select id="hot-select"
+        class="form-control new-select" aria-label="Chọn thể loại">
+    <option value="all">Tất cả</option>
+    @foreach (var item in Model.CategoryStories)
+    {
+        <option value=@item.category_story_name>@item.category_story_name</option>
+    }
+</select>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="index-intro">
+        @for (int i = 0; i < Model.Stories.Count; i++)
+        {
+            var item = Model.Stories[i];
+            <div class="item top-@(i+1)" itemscope="" itemtype="https://schema.org/Book">
+                <a href=@item.slug itemprop="url">
+                    @*<span class="full-label"></span>*@
+                    <img src=@item.avatar_path alt=@item.story_name class="img-responsive item-img" itemprop="image">
+                    <div class="title">
+                        <h3 itemprop="name">@item.story_name</h3>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+
+    
+</div>
+<div class="container" id="list-index">
+    <div class="row text-center"></div>
+    <div class="list list-truyen list-new col-xs-12 col-sm-12 col-md-8 col-truyen-main">
+        <div class="title-list">
+            <h2>
+                <a href="https://truyenfull.vn/danh-sach/truyen-moi/" title="Truyện mới">
+                    Truyện mới cập
+                    nhật
+                </a>
+            </h2><a href="https://truyenfull.vn/danh-sach/truyen-moi/"
+                    title="Truyện mới"><span class="glyphicon glyphicon-menu-right"></span></a>
+            <select id="new-select" class="form-control new-select" aria-label="Chọn thể loại">
+                <option value="all">Tất cả</option>
+                @foreach (var item in Model.CategoryStories)
+                {
+                    <option value=@item.category_story_name>@item.category_story_name</option>
+                }
+            </select>
+        </div>
+        @for (int i = 0; i < Model.NewChaptersUpdate.Count; i++)
+        {
+            var item = Model.NewChaptersUpdate[i];
+            <div class="row" itemscope="" itemtype="https://schema.org/Book">
+                <div class="col-xs-9 col-sm-6 col-md-5 col-title">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <h3 itemprop="name">
+                        <a href=@item.slug title=@item.story_name itemprop="url">@item.story_name</a>
+                    </h3>
+                </div>
+                <div class="hidden-xs col-sm-3 col-md-3 col-cat text-888">
+                    @for (int x = 0; x < item.Story?.genre.Count(); x++)
+                    {
+                        var gen = item.Story.genre[x];
+                        <a itemprop="genre" href=@gen title=@gen>@gen</a>
+                        if (item.Story?.genre.Count() > 1)
+                        {
+                            <span>,</span>
+                        }
+                    }
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-2 col-chap text-info">
+                    <a href=@item.chapter_title
+                       title=@item.chapter_title>
+                        <span class="chapter-text">
+                            @*<span>
+                                    Chương
+                                </span>*@
+                            @item.chapter_title
+                        </span>@*519*@
+                    </a>
+                </div>
+                <div class="hidden-xs hidden-sm col-md-2 col-time text-888">@item.modified_on.ToRelativeDate()</div>
+            </div>
+        }
+    </div>
+
+    <div class="visible-md-block visible-lg-block col-md-4 text-center col-truyen-side">
+        <div class="list list-truyen list-history col-xs-12">
+            <div class="title-list">
+                <h2>Truyện đang đọc</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-lg-7">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <h3 itemprop="name">
+                        <a href="https://truyenfull.vn/nhan-sinh-tu-do-min-bat-dau/">
+                            Nhân
+                            Sinh Từ Dò Mìn Bắt Đầu
+                        </a>
+                    </h3>
+                </div>
+                <div class="col-md-7 col-lg-5 text-info">
+                    <a href="https://truyenfull.vn/nhan-sinh-tu-do-min-bat-dau/chuong-519/">
+                        Đọc tiếp
+                        C519
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-lg-7">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <h3 itemprop="name"><a href="https://truyenfull.vn/chang-kho/">Chàng Khờ</a></h3>
+                </div>
+                <div class="col-md-7 col-lg-5 text-info">
+                    <a href="https://truyenfull.vn/chang-kho/chuong-333-334-335-336/">
+                        Đọc tiếp
+                        C333-334-335-336
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-lg-7">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <h3 itemprop="name"><a href="https://truyenfull.vn/nu-than-bo/">Nữ Thần Bổ</a></h3>
+                </div>
+                <div class="col-md-7 col-lg-5 text-info">
+                    <a href="https://truyenfull.vn/nu-than-bo/chuong-1/">Đọc tiếp C1</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-lg-7">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <h3 itemprop="name">
+                        <a href="https://truyenfull.vn/su-tra-thu-sai-lam-cua-tong-giam-doc/">
+                            Sự Trả Thù
+                            Sai Lầm Của Tổng Giám Đốc
+                        </a>
+                    </h3>
+                </div>
+                <div class="col-md-7 col-lg-5 text-info">
+                    <a href="https://truyenfull.vn/su-tra-thu-sai-lam-cua-tong-giam-doc/chuong-1/">
+                        Đọc tiếp
+                        C1
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-lg-7">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <h3 itemprop="name">
+                        <a href="https://truyenfull.vn/con-luan-ma-chu/">Côn Luân Ma Chủ</a>
+                    </h3>
+                </div>
+                <div class="col-md-7 col-lg-5 text-info">
+                    <a href="https://truyenfull.vn/con-luan-ma-chu/chuong-13/">Đọc tiếp C13</a>
+                </div>
+            </div>
+        </div>
+        <div class="list list-truyen list-cat col-xs-12">
+            <div class="title-list">
+                <h4>Thể loại truyện</h4>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <a href="https://truyenfull.vn/the-loai/tien-hiep/"
+                       title="Truyện Tiên Hiệp">Tiên Hiệp</a>
+                </div>@foreach (var item in Model.CategoryStories)
+                {
+                    <div class="col-xs-6">
+                        <a href=@item.category_story_name
+                           title="Truyện @item.category_story_name">@item.category_story_name</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" id="truyen-slide">
+    <div class="list list-thumbnail col-xs-12">
+        <div class="title-list">
+            <h2>
+                <a href="https://truyenfull.vn/danh-sach/truyen-full/" title="Truyện full">
+                    Truyện đã hoàn
+                    thành
+                </a>
+            </h2><a href="https://truyenfull.vn/danh-sach/truyen-full/"
+                    title="Truyện full"><span class="glyphicon glyphicon-menu-right"></span></a>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.StoriesFull)
+            {
+                <div class="col-xs-4 col-sm-3 col-md-2">
+                    <a href=@item.story_name
+                       title=@item.story_name>
+                        <img src=@item.avatar_path alt=@item.story_name>
+                        <div class="caption">
+                            <h3>@item.story_name</h3><small class="btn-xs label-primary">Full - 36 chương</small>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
 </div>

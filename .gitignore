@@ -1,4 +1,9 @@
-ScanStory/spiders/TruyenFull/__pycache__/
-ScanStory/spiders/__pycache__/
-ScanStory/__pycache__/
-.idea/
+/.vs
+/.idea
+/ScanStory/spiders/__pycache__
+/ScanStory/__pycache__
+/ScanStory/spiders/TruyenFull/__pycache__
+/truyendochay/.vs
+/truyendochay/truyendochay/bin
+/truyendochay/truyendochay/obj
+

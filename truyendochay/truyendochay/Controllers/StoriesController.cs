@@ -1,25 +1,24 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using truyendochay.Models;
 using truyendochay.Models.ViewModel;
 using truyendochay.Services;
+using Newtonsoft.Json;
+using truyendochay.Models;
+using System.Collections.Generic;
 
 namespace truyendochay.Controllers
 {
-    public class HomeController : Controller
+    public class StoriesController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<StoriesController> _logger;
         private readonly ScanStoryService _scanStoryService;
-        private readonly int page = 21;
+        private readonly int page = 50;
         private readonly int pageIndex = 0;
         private readonly IHostingEnvironment _environment;
-
-        public HomeController(ILogger<HomeController> logger, ScanStoryService scanStoryService, IHostingEnvironment environment)
+        public StoriesController(ILogger<StoriesController> logger, ScanStoryService scanStoryService, IHostingEnvironment environment)
         {
             _logger = logger;
             _scanStoryService = scanStoryService;
@@ -27,7 +26,7 @@ namespace truyendochay.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.Client, NoStore = true)]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromRoute] string slug)
         {
             var model = new HomePage();
             var categories = await _scanStoryService.getCategoriesStory();
@@ -56,27 +55,23 @@ namespace truyendochay.Controllers
                     listStories = await _scanStoryService.getCategories();
                 }
             }
+            //get story
+            var story = _scanStoryService.GetStory(slug);
+            // get list chapter of story
+            var listChapters = _scanStoryService.GetChapterToStory(storyName: story.story_name, pageIndex, page);
+            // get last chapters 
+            var lastChapters = _scanStoryService.GetChapterLastToStory(storyName: story.story_name);
+            // count all chapters
+            var count = _scanStoryService.CountAllChapters(storyName: story.story_name);
+            var psCount = count % page;
+            model.PageCount = psCount == 0 ? count / page : (count / page) + 1; 
 
-            model.Chapters = _scanStoryService.GetChapters(pageIndex, page);
-            model.Stories = _scanStoryService.GetStories(pageIndex, 13);
-            model.CategoryStories = categories.ConvertAll<CategoryStoryViewModel>(s => s.Convert());
             model.ListStories = listStories.ConvertAll<CategoryViewModel>(s => s.Convert());
-            model.StoriesFull = _scanStoryService.SearchTruyenFull(pageIndex, 12);
-            //truyen mới cập nhật
-            model.NewChaptersUpdate = _scanStoryService.NewChaptersUpdate(pageIndex, page);
+            model.CategoryStories = categories.ConvertAll<CategoryStoryViewModel>(s => s.Convert());
+            model.Chapters = listChapters;
+            model.LastChapters = lastChapters;
+            model.Story = story;
             return View(model);
         }
-
-        [HttpGet("tim-kiem")]
-        public JsonResult Search(string textSearch = null)
-        {
-            var datas = _scanStoryService.Search(textSearch, pageIndex, 5);
-            return Json(datas);
-        }
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
     }
 }

@@ -20,3 +20,4 @@ class Chapter(scrapy.Item):
     collection_name = scrapy.Field()
     story_name = scrapy.Field()
     sort_number = scrapy.Field()
+    slug = scrapy.Field()
