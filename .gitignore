@@ -7,3 +7,14 @@
 /truyendochay/truyendochay/bin
 /truyendochay/truyendochay/obj
 
+/eStoryContainer/.vs/eStoryContainer/config
+/eStoryContainer/eStoryContainer.Core/bin/Debug/netcoreapp3.1
+/eStoryContainer/eStoryContainer.Core/obj
+/eStoryContainer/eStoryContainer.Data/obj
+/eStoryContainer/eStoryContainer.Data/bin/Debug/netcoreapp3.1
+/eStoryContainer/eStoryContainer.Logging/obj/Debug/netcoreapp3.1
+/eStoryContainer/eStoryContainer.Logging/obj
+/eStoryContainer/eStoryContainer.Services/obj
+/eStoryContainer/eStoryContainer.Services/bin/Debug/netcoreapp3.1
+/eStoryContainer/eStoryContainer.Web/bin/Debug/net5.0
+/eStoryContainer/eStoryContainer.Web/obj

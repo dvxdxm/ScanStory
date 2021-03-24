@@ -58,7 +58,7 @@ def get_content_story_to_url(response, link):
     item = Story()
     avatarPath = response.xpath('//div[contains(@class,"book")]//img/@src').get()
     story_name = response.xpath('//h3[contains(@class,"title")]/text()').get()
-    description = response.xpath('//div[contains(@class, "desc-text")]').get()
+    description = response.xpath('//div[contains(@class, "desc-text desc-text-full") or contains(@class, "desc-text")]').get()
     source = response.xpath('//span[contains(@class, "source")]/text()').get()
     status = response.xpath('//span[contains(@class, "text-primary")]/text()').get()
     author = response.xpath('//div[contains(@class, "info")]//a[contains(@itemprop, "author")]/text()').get()

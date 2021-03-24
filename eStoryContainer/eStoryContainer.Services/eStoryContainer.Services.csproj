@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Categories\" />
+    <Folder Include="Chapters\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\eStoryContainer.Core\eStoryContainer.Core.csproj" />
+    <ProjectReference Include="..\eStoryContainer.Data\eStoryContainer.Data.csproj" />
+  </ItemGroup>
+
+</Project>
