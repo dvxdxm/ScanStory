@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 
-namespace eStoryContainer.ViewModels
+namespace eStoryContainer.Core.ViewModels
 {
     public class ChapterViewModel
     {

@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using eStoryContainer.Core.ViewModels;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 
@@ -20,23 +21,23 @@ namespace eStoryContainer.Core.Entities
         public string story_name { get; set; }
         public Story Story { get; set; }
         public string slug { get; set; }
-        //public ChapterViewModel Convert()
-        //{
+        public ChapterViewModel Convert()
+        {
 
-        //    return new ChapterViewModel
-        //    {
-        //        _id = _id,
-        //        chapter_title = chapter_title,
-        //        created_by = created_by,
-        //        created_on = created_on,
-        //        modified_by = modified_by,
-        //        modified_on = modified_on,
-        //        collection_name = collection_name,
-        //        story_id = story_id,
-        //        story_name = story_name,
-        //        slug = slug,
-        //        Story = Story == null ? null : Story.Convert()
-        //    };
-        //}
+            return new ChapterViewModel
+            {
+                _id = _id,
+                chapter_title = chapter_title,
+                created_by = created_by,
+                created_on = created_on,
+                modified_by = modified_by,
+                modified_on = modified_on,
+                collection_name = collection_name,
+                story_id = story_id,
+                story_name = story_name,
+                slug = slug,
+                Story = Story == null ? null : Story.Convert()
+            };
+        }
     }
 }

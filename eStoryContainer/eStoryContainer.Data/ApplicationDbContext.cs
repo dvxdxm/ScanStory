@@ -1,12 +1,11 @@
 ﻿using eStoryContainer.Core.Entities;
 using eStoryContainer.Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
 namespace eStoryContainer.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext
     {
         private readonly IMongoDatabase _database = null;
         public ApplicationDbContext(IScanStoryDB settings)

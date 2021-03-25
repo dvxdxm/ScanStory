@@ -18,3 +18,6 @@
 /eStoryContainer/eStoryContainer.Services/bin/Debug/netcoreapp3.1
 /eStoryContainer/eStoryContainer.Web/bin/Debug/net5.0
 /eStoryContainer/eStoryContainer.Web/obj
+/eStoryContainer/.vs/eStoryContainer/DesignTimeBuild
+/eStoryContainer/eStoryContainer.Logging/bin/Debug/netcoreapp3.1
+/eStoryContainer/eStoryContainer.ApiController/obj

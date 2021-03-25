@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using eStoryContainer.Core.ViewModels;
+using MongoDB.Bson;
 using System;
 
 namespace eStoryContainer.Core.Entities
@@ -23,30 +24,30 @@ namespace eStoryContainer.Core.Entities
         public string status { get; set; }
         public string story_name { get; set; }
         public string slug { get; set; }
-        //public StoryViewModel Convert()
-        //{
-        //    if (_id.Equals(null)) return null;
-        //    return new StoryViewModel
-        //    {
-        //        _id = _id,
-        //        story_name = story_name,
-        //        created_by = created_by,
-        //        created_on = created_on,
-        //        modified_by = modified_by,
-        //        modified_on = modified_on,
-        //        collection_name = collection_name,
-        //        status = status,
-        //        source = source,
-        //        keywords = keywords,
-        //        is_deleted = is_deleted,
-        //        hidden = hidden,
-        //        genre = genre,
-        //        description_seo = description_seo,
-        //        description = description,
-        //        avatar_path = avatar_path,
-        //        author = author,
-        //        slug = !string.IsNullOrWhiteSpace(slug) ? string.Format("/{0}", slug) : null
-        //    };
-        //}
+        public StoryViewModel Convert()
+        {
+            if (_id.Equals(null)) return null;
+            return new StoryViewModel
+            {
+                _id = _id,
+                story_name = story_name,
+                created_by = created_by,
+                created_on = created_on,
+                modified_by = modified_by,
+                modified_on = modified_on,
+                collection_name = collection_name,
+                status = status,
+                source = source,
+                keywords = keywords,
+                is_deleted = is_deleted,
+                hidden = hidden,
+                genre = genre,
+                description_seo = description_seo,
+                description = description,
+                avatar_path = avatar_path,
+                author = author,
+                slug = !string.IsNullOrWhiteSpace(slug) ? string.Format("/{0}", slug) : null
+            };
+        }
     }
 }

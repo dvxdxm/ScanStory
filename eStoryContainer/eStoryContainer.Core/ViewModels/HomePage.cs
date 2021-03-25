@@ -1,7 +1,7 @@
 ﻿using eStoryContainer.Core.Entities;
 using System.Collections.Generic;
 
-namespace eStoryContainer.ViewModels
+namespace eStoryContainer.Core.ViewModels
 {
     public class HomePage
     {

@@ -1,18 +1,15 @@
 using eStoryContainer.Core.Interfaces;
 using eStoryContainer.Data;
 using eStoryContainer.Models;
+using eStoryContainer.Services.Categories;
+using eStoryContainer.Services.Chapters;
 using eStoryContainer.Services.Stories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace eStoryContainer.Web
 {
@@ -26,11 +23,18 @@ namespace eStoryContainer.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<ApplicationDbContext>(Configuration.GetSection("ScanStorySettings"));
+            //services.AddControllers();
+
+            services.Configure<ScanStoryDB>(Configuration.GetSection("ScanStorySettings"));
 
             services.AddSingleton<IScanStoryDB>(sp => sp.GetRequiredService<IOptions<ScanStoryDB>>().Value);
 
-            services.AddScoped<StoryService>();
+            services.AddSingleton<ApplicationDbContext>();
+
+            services.AddScoped<IStoryService, StoryService>();
+            services.AddScoped<IChapterService, ChapterService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICategoryStoryService, CategoryStoryService>();
 
             services.AddMemoryCache();
 
@@ -62,6 +66,9 @@ namespace eStoryContainer.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("stories", "{slug}", new { controller = "Stories", action = "Index" });
+                endpoints.MapControllerRoute("stories", "/{slug}/trang-{index}/#list-chapter", new { controller = "Stories", action = "Index" });
+                endpoints.MapControllerRoute("detail", "/chi-tiet/{slug}", new { controller = "Chapters", action = "Index" });
             });
         }
     }

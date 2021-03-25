@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using System;
 
-namespace eStoryContainer.ViewModels
+namespace eStoryContainer.Core.ViewModels
 {
     public class CategoryViewModel
     {

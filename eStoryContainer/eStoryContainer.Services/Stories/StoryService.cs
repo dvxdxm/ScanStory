@@ -1,42 +1,42 @@
 ﻿using eStoryContainer.Core.Entities;
 using eStoryContainer.Core.Interfaces;
 using eStoryContainer.Core.Utils;
+using eStoryContainer.Core.ViewModels;
 using eStoryContainer.Data;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace eStoryContainer.Services.Stories
 {
     public class StoryService : IStoryService
     {
-        private readonly IAppLogger<StoryService> _logger;
+        private readonly ILogger<StoryService> _logger;
         protected readonly ApplicationDbContext _dbContext;
 
-        public StoryService(ApplicationDbContext dbContext, IAppLogger<StoryService> logger)
+        public StoryService(ApplicationDbContext dbContext, ILogger<StoryService> logger)
         {
             _dbContext = dbContext;
             _logger = logger;
         }
 
-        public Story GetBySlugAsync(string slug)
+        public Story GetBySlug(string slug)
         {
             return _dbContext.Stories.Where(story => story.slug == slug).FirstOrDefault();
         }
 
-        public async Task<List<Story>> GetListAsync(int pageIndex, int page)
+        public List<Story> GetList(int pageIndex, int page)
         {
-            return await _dbContext.Stories.Where(story => true).Skip((pageIndex + 1) * page).Take(page).OrderByDescending(x => x.modified_on).ToListAsync();
+            return _dbContext.Stories.Where(story => true).Skip((pageIndex + 1) * page).Take(page).OrderByDescending(x => x.modified_on).ToList();
         }
 
-        public async Task<int> CountAllAsync()
+        public int CountAll()
         {
-            var results = await _dbContext.Stories.Where(story => true).ToListAsync();
+            var results = _dbContext.Stories.Where(story => true).ToList();
             return results.Count;
         }
 
-        public List<Story> SearchByNameAsync(string textSearch, int pageIndex, int page)
+        public List<Story> SearchByName(string textSearch, int pageIndex, int page)
         {
             if(textSearch == null)
             {
@@ -45,9 +45,17 @@ namespace eStoryContainer.Services.Stories
             return _dbContext.Stories.Where(delegate (Story x) { if (x.story_name.ToUpper().UTF8Convert().Contains(textSearch.ToUpper().UTF8Convert())) { return true; } else { return false; } }).Skip((pageIndex + 1) * page).Take(page).OrderByDescending(s => s.modified_on).ToList();
         }
 
-        public int CountBySearchAsync(string textSearch)
+        public int CountBySearch(string textSearch)
         {
             return _dbContext.Stories.Where(delegate (Story x) { if (x.story_name.ToUpper().UTF8Convert().Contains(textSearch.ToUpper().UTF8Convert())) { return true; } else { return false; } }).Count();
+        }
+
+        public List<StoryViewModel> SearchTruyenFull(int pageIndex, int page)
+        {
+            var items = _dbContext.Stories.Where(story => true).Skip((pageIndex + 1) * page).Take(page).OrderByDescending(s => s.modified_on).ToList();
+
+            var totalRecord = _dbContext.Stories.Where(story => true).Count();
+            return items.Select(x => x.Convert()).ToList();
         }
     }
 }
