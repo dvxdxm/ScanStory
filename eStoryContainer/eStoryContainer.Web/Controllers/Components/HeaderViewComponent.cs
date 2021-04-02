@@ -15,8 +15,6 @@ namespace eStoryContainer.Web.Controllers.Components
         private readonly IStoryService _storyService;
         private readonly ICategoryService _categoryService;
         private readonly ICategoryStoryService _categoryStoryService;
-        private readonly int page = 21;
-        private readonly int pageIndex = 0;
         private readonly IHostingEnvironment _environment;
 
         public HeaderViewComponent(IStoryService storyService, ICategoryService categoryService, IHostingEnvironment environment, ICategoryStoryService categoryStoryService)

@@ -57,5 +57,10 @@ namespace eStoryContainer.Services.Stories
             var totalRecord = _dbContext.Stories.Where(story => true).Count();
             return items.Select(x => x.Convert()).ToList();
         }
+
+        public Story GetByName(string name)
+        {
+            return _dbContext.Stories.Where(story => story.story_name == name).FirstOrDefault();
+        }
     }
 }

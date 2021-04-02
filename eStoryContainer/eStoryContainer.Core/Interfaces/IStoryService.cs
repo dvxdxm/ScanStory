@@ -7,6 +7,7 @@ namespace eStoryContainer.Core.Interfaces
     public interface IStoryService
     {
         Story GetBySlug(string slug);
+        Story GetByName(string name);
         List<Story> GetList(int pageIndex, int page);
         List<Story> SearchByName(string textSearch, int pageIndex, int page);
         int CountAll();

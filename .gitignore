@@ -21,3 +21,4 @@
 /eStoryContainer/.vs/eStoryContainer/DesignTimeBuild
 /eStoryContainer/eStoryContainer.Logging/bin/Debug/netcoreapp3.1
 /eStoryContainer/eStoryContainer.ApiController/obj
+/eStoryContainer/eStoryContainer.ApiController/bin/Debug/netcoreapp3.1

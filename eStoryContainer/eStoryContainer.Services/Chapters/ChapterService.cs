@@ -1,10 +1,8 @@
 ﻿using eStoryContainer.Core.Common;
 using eStoryContainer.Core.Entities;
 using eStoryContainer.Core.Interfaces;
-using eStoryContainer.Core.Utils;
 using eStoryContainer.Core.ViewModels;
 using eStoryContainer.Data;
-using eStoryContainer.Services.Stories;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +31,7 @@ namespace eStoryContainer.Services.Chapters
             var chapters = _dbContext.Chapters.Where(chapter => true).Skip((pageIndex + 1) * page).Take(page).OrderByDescending(s => s.modified_on).ToList();
             foreach (var item in chapters)
             {
-                item.Story = _storyService.GetBySlug(item.slug);
+                item.Story = _storyService.GetByName(item.story_name);
             }
             var results = chapters.Select(x => x.Convert()).ToList();
             return results;

@@ -14,19 +14,19 @@
             <div class="col-xs-12 col-sm-4 col-md-4 info-holder">
                 <div class="books">
                     <div class="book">
-                        <img src=@Model.Story.avatar_path
-                             alt=@Model.Story.story_name itemprop="image">
+                        <img src="@Model.Story.avatar_path"
+                             alt="@Model.Story.story_name" itemprop="image">
                     </div>
                 </div>
                 <div class="info">
                     <div>
-                        <h3>Tác giả:</h3><a itemprop="author" href="javascript:void(0)" title=@Model.Story.author>@Model.Story.author</a>
+                        <h3>Tác giả:</h3><a itemprop="author" href="javascript:void(0)" title="@Model.Story.author">@Model.Story.author</a>
                     </div>
                     <div>
                         <h3>Thể loại:</h3>
                         @foreach (var gen in Model.Story.genre)
                         {
-                            <a itemprop="genre" href="javascript:void(0)" title=@gen>@gen</a>
+                            <a itemprop="genre" href="javascript:void(0)" title="@gen">@gen</a>
                         }
                     </div>
                     <div>
@@ -83,7 +83,7 @@
                             var item = Model.LastChapters[index];
                             <li>
                                 <span class="glyphicon glyphicon-certificate"></span>
-                                <a href="/chi-tiet/@item.slug" title=@item.chapter_title>
+                                <a href="/chi-tiet/@item.slug" title="@item.chapter_title">
                                     <span class="chapter-text">
                                         <span>
                                             @item.chapter_title
@@ -112,7 +112,7 @@
                             {
                                 <li>
                                     <span class="glyphicon glyphicon-certificate"></span>
-                                    <a href="/chi-tiet/@item.slug" title=@item.chapter_title>
+                                    <a href="/chi-tiet/@item.slug" title="@item.chapter_title">
                                         <span class="chapter-text">
                                             <span>
                                                 @item.chapter_title
@@ -133,7 +133,7 @@
                             {
                                 <li>
                                     <span class="glyphicon glyphicon-certificate"></span>
-                                    <a href="/chi-tiet/@item.slug" title=@item.chapter_title>
+                                    <a href="/chi-tiet/@item.slug" title="@item.chapter_title">
                                         <span class="chapter-text">
                                             <span>
                                                 @item.chapter_title

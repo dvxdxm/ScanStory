@@ -69,6 +69,7 @@ namespace eStoryContainer.Web
                 endpoints.MapControllerRoute("stories", "{slug}", new { controller = "Stories", action = "Index" });
                 endpoints.MapControllerRoute("stories", "/{slug}/trang-{index}/#list-chapter", new { controller = "Stories", action = "Index" });
                 endpoints.MapControllerRoute("detail", "/chi-tiet/{slug}", new { controller = "Chapters", action = "Index" });
+                endpoints.MapControllerRoute("detail", "/chi-tiet/{slug}", new { controller = "Chapters", action = "Index" });
             });
         }
     }

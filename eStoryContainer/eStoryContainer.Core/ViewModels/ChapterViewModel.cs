@@ -19,6 +19,6 @@ namespace eStoryContainer.Core.ViewModels
         public string story_id { get; set; }
         public string story_name { get; set; }
         public string slug { get; set; }
-        public StoryViewModel Story { get; set; } 
+        public StoryViewModel Story { get; set; }
     }
 }
