@@ -6410,8 +6410,10 @@ img {
     display: block;
     width: 196px;
     height: 36px;
-    background: url(//static.8cache.com/img/spriteimg_new_white_op.png) no-repeat 0 0;
-    text-indent: -9999px;
+    background: url(/img/logo.png) no-repeat 0 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     white-space: nowrap;
     outline: none;
     margin: 5px 5px 0 0

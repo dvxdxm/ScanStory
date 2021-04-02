@@ -45,10 +45,13 @@ namespace eStoryContainer.Core.Utils
         {
             return String.Format("{0}/{1}", "chi-tiet", slug); ;
         }
-
         public static string ConvertSlugifyToGenre(this string slug)
         {
             return String.Format("{0}/{1}", "the-loai", slug); ;
+        }
+        public static string ConvertSlugifyToListStory(this string slug)
+        {
+            return String.Format("{0}/{1}", "danh-sach", slug); ;
         }
     }
 }
