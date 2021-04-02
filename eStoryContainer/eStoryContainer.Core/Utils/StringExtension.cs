@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Slugify;
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -34,5 +35,20 @@ namespace eStoryContainer.Core.Utils
             return timeSpan.Days > 365 ? String.Format("{0} năm trước", timeSpan.Days / 365) : "1 năm trước";
         }
 
+        public static string SlugifyExt(this string name)
+        {
+            SlugHelper slug = new SlugHelper();
+            var generateSlug =  slug.GenerateSlug(name);
+            return generateSlug;
+        }
+        public static string ConvertSlugifyToChapter(this string slug)
+        {
+            return String.Format("{0}/{1}", "chi-tiet", slug); ;
+        }
+
+        public static string ConvertSlugifyToGenre(this string slug)
+        {
+            return String.Format("{0}/{1}", "the-loai", slug); ;
+        }
     }
 }

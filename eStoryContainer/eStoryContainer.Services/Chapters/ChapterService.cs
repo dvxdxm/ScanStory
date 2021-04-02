@@ -29,7 +29,7 @@ namespace eStoryContainer.Services.Chapters
 
         public List<ChapterViewModel> NewChaptersUpdate(int pageIndex, int page)
         {
-            var chapters = _dbContext.Chapters.Where(chapter => true).DistinctBy(d => d.story_name).Skip((pageIndex + 1) * page).Take(page).OrderByDescending(s => s.modified_on);
+            var chapters = _dbContext.Chapters.Where(chapter => true).DistinctBy(d => d.story_name).OrderByDescending(s => s.modified_on).Skip((pageIndex + 1) * page).Take(page).ToList();
 
             foreach (var item in chapters)
             {
