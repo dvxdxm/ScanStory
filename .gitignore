@@ -22,3 +22,8 @@
 /eStoryContainer/eStoryContainer.Logging/bin/Debug/netcoreapp3.1
 /eStoryContainer/eStoryContainer.ApiController/obj
 /eStoryContainer/eStoryContainer.ApiController/bin/Debug/netcoreapp3.1
+eStoryContainer/eStoryContainer.Web/node_modules
+NewScanStory/node_modules
+eStoryContainer/.vs
+ScanStory/.idea
+ScanStory/Models/__pycache__/
