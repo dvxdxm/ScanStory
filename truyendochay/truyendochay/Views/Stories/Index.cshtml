@@ -38,17 +38,17 @@
                 <div class="rate">
                     <div class="rate-holder" data-score="10.0" style="cursor: pointer;">
                         @*<img alt="1"
-                            src="//static.8cache.com/lib/raty/images/star-on.png"
-                            title="Không còn gì để nói...">&nbsp;<img alt="2"
-                                                                      src="//static.8cache.com/lib/raty/images/star-on.png" title="WTF">&nbsp;<img alt="3"
-                                                                                                                                                   src="//static.8cache.com/lib/raty/images/star-on.png"
-                                                                                                                                                   title="Cái gì thế này ?!">&nbsp;<img alt="4"
-                                                                                                                                                                                        src="//static.8cache.com/lib/raty/images/star-on.png" title="Haizz">&nbsp;<img alt="5" src="//static.8cache.com/lib/raty/images/star-on.png" title="Tạm">&nbsp;<img alt="6" src="//static.8cache.com/lib/raty/images/star-on.png"
-                                                                                                                                                                                                                                                                                                                                                            title="Cũng được">&nbsp;<img alt="7"
-                                                                                                                                                                                                                                                                                                                                                                                         src="//static.8cache.com/lib/raty/images/star-on.png" title="Khá đấy">&nbsp;<img alt="8" src="//static.8cache.com/lib/raty/images/star-on.png"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          title="Được">&nbsp;<img alt="9"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  src="//static.8cache.com/lib/raty/images/star-on.png" title="Hay">&nbsp;<img alt="10" src="//static.8cache.com/lib/raty/images/star-on.png"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               title="Tuyệt đỉnh!"><input name="score" type="hidden" value="10">*@
+                src="//static.8cache.com/lib/raty/images/star-on.png"
+                title="Không còn gì để nói...">&nbsp;<img alt="2"
+                                                          src="//static.8cache.com/lib/raty/images/star-on.png" title="WTF">&nbsp;<img alt="3"
+                                                                                                                                       src="//static.8cache.com/lib/raty/images/star-on.png"
+                                                                                                                                       title="Cái gì thế này ?!">&nbsp;<img alt="4"
+                                                                                                                                                                            src="//static.8cache.com/lib/raty/images/star-on.png" title="Haizz">&nbsp;<img alt="5" src="//static.8cache.com/lib/raty/images/star-on.png" title="Tạm">&nbsp;<img alt="6" src="//static.8cache.com/lib/raty/images/star-on.png"
+                                                                                                                                                                                                                                                                                                                                                title="Cũng được">&nbsp;<img alt="7"
+                                                                                                                                                                                                                                                                                                                                                                             src="//static.8cache.com/lib/raty/images/star-on.png" title="Khá đấy">&nbsp;<img alt="8" src="//static.8cache.com/lib/raty/images/star-on.png"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                              title="Được">&nbsp;<img alt="9"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      src="//static.8cache.com/lib/raty/images/star-on.png" title="Hay">&nbsp;<img alt="10" src="//static.8cache.com/lib/raty/images/star-on.png"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   title="Tuyệt đỉnh!"><input name="score" type="hidden" value="10">*@
                     </div>
                     <em class="rate-text"></em>
                     <div class="small" itemprop="aggregateRating" itemscope=""
@@ -59,19 +59,20 @@
                             </strong>/<span class="text-muted"
                                             itemprop="bestRating">10</span>
                             @*từ <strong>
-                                    <span itemprop="ratingCount">1</span>
-                                    lượt
-                                </strong>*@
+                        <span itemprop="ratingCount">1</span>
+                        lượt
+                    </strong>*@
                         </em>
                     </div>
                 </div>
-                <div class="desc-text" itemprop="description">
-                    @Html.Raw(Model.Story.description)
-                </div>
-                <div class="showmore">
-                    <a class="btn btn-default btn-xs hide" href="javascript:void(0)"
-                       title="Xem thêm">Xem thêm »</a>
-                </div>
+                @Html.Raw(Model.Story.description)
+                @*<div class="desc-text" itemprop="description">
+            @Html.Raw(Model.Story.description)
+        </div>*@
+                @*<div class="showmore">
+            <a class="btn btn-default btn-xs hide" href="javascript:void(0)"
+               title="Xem thêm">Xem thêm »</a>
+        </div>*@
                 <div class="l-chapter">
                     <div class="l-title">
                         <h3>Các chương mới nhất</h3>
@@ -145,16 +146,25 @@
                     </ul>
                 </div>
             </div>
-            @*<ul class="pagination pagination-sm">
-                <li class="active"><span>1<span class="sr-only"> (đang xem)</span></span></li>
+            <ul class="pagination pagination-sm">
+                @{ 
+                    for (var i = 0; i < Model.PageCount; i++)
+                    {
+                        if (i < 5)
+                        {
+                                <li><a href="javascript:void(0);" onclick="loadDataChapters(@i);" title="@Model.Story.story_name - Trang @i">@i</a></li>
+                        }
+                    }
+                }
+                @*<li class="active"><span>1<span class="sr-only"> (đang xem)</span></span></li>
                 <li><a href="https://truyenfull.vn/linh-vu-thien-ha/trang-2/#list-chapter" title="Linh Vũ Thiên Hạ - Trang 2">2</a></li>
                 <li><a href="https://truyenfull.vn/linh-vu-thien-ha/trang-3/#list-chapter" title="Linh Vũ Thiên Hạ - Trang 3">3</a></li>
                 <li><a href="https://truyenfull.vn/linh-vu-thien-ha/trang-4/#list-chapter" title="Linh Vũ Thiên Hạ - Trang 4">4</a></li>
                 <li><a href="https://truyenfull.vn/linh-vu-thien-ha/trang-6/#list-chapter" title="Linh Vũ Thiên Hạ - Trang 6">6</a></li>
                 <li><a href="https://truyenfull.vn/linh-vu-thien-ha/trang-11/#list-chapter" title="Linh Vũ Thiên Hạ - Trang 11">11</a></li>
                 <li><a href="https://truyenfull.vn/linh-vu-thien-ha/trang-2/#list-chapter" title="Linh Vũ Thiên Hạ - Trang 2"><span class="sr-only">Trang tiếp</span><span class="glyphicon glyphicon-menu-right"></span></a></li>
-                <li><a href="https://truyenfull.vn/linh-vu-thien-ha/trang-95/#list-chapter" title="Linh Vũ Thiên Hạ - Trang 95">Cuối <span class="arrow">»</span></a></li>
-            </ul>*@
+                <li><a href="https://truyenfull.vn/linh-vu-thien-ha/trang-95/#list-chapter" title="Linh Vũ Thiên Hạ - Trang 95">Cuối <span class="arrow">»</span></a></li>*@
+            </ul>
             @*<input id="truyen-id" type="hidden" value="22004"><input id="total-page" type="hidden" value="1"><input id="truyen-ascii" type="hidden" value="nu-than-bo"><input id="truyen-comment" type="hidden" value="nu-than-bo"><input id="chapter-sac" type="hidden" value="0">*@
         </div>
         <div class="col-xs-12 comment-box">
@@ -184,3 +194,28 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+
+    function loadDataChapters(pageIndex) {
+        //var pageIndex = pageIndex;
+        $.ajax({
+            type: "GET",
+            url: "${@Model.Story.slug}/trang-${pageIndex}/#list-chapter",
+            contentType: "application/json; charset=utf-8",
+            success: function (datas) {
+                if (datas?.length > 0) {
+                    @Model.Chapters = datas;
+                }
+            },
+            error: function (req, status, error) {
+                console.log(error);
+            }
+        });
+    };
+
+
+    //$("#sumbit-search").click(function () {
+    //    loadData();
+    //});
+
+</script>

@@ -5,9 +5,9 @@
 @model eStoryContainer.Core.ViewModels.HomePage
 <div class="container" id="intro-index">
     <div class="title-list">
-        <h2><a href="https://truyenfull.vn/danh-sach/truyen-hot/" title="Truyện hot">Truyện hot</a></h2><a href="https://truyenfull.vn/danh-sach/truyen-hot/" title="Truyện hot">
+        <h2><a href="danh-sach/truyen-hot/" title="Truyện hot">Truyện hot</a></h2><a href="danh-sach/truyen-hot/" title="Truyện hot">
             <span class="glyphicon glyphicon-fire"></span>
-        </a><select id="hot-select"
+        </a><select id="hot-select" onchange="loadData2()"
         class="form-control new-select" aria-label="Chọn thể loại">
     <option value="all">Tất cả</option>
     @foreach (var item in Model.CategoryStories)
@@ -207,3 +207,51 @@
         </div>
     </div>
 </div>
+
+<script>
+    function loadData2() {
+        var textSearch = $("#hot-select").val();
+        $.ajax({
+            type: "GET",
+            url: "tim-kiem",
+            data: { textSearch: textSearch },
+            contentType: "application/json; charset=utf-8",
+            success: function (datas) {
+                var result = '';
+                if (datas?.length > 0) {
+                    for (var i = 0; i < datas.length; i++) {
+                        result += `<a href="${datas[i].slug}" class="list-group-item" title="${datas[i].story_name}">${datas[i].story_name}</a>`;
+                    }
+                } else {
+                    result += `<span class="list-group-item text-888">Không tìm thấy</span>`;
+                }
+
+                $('div').removeClass("hide");
+                $('.list-search-res').html(result);
+            },
+            error: function (req, status, error) {
+                console.log(error);
+            }
+        });
+    }
+
+    //$("#-select").click(function () {
+    //    loadData();
+    //});
+
+    //$(document).on('click', function (e) {
+    //    var hasHide = $('div.list-search-res').hasClass("hide");
+    //    if ($(e.target).closest(".list-search-res").length === 0 && !hasHide) {
+    //        $("div.list-search-res").addClass("hide");
+    //    }
+    //});
+
+    //$(document).ready(function () {
+    //    $("#hot-select").on("click", function () {
+    //        var val = $("#hot-select").val();
+    //        if (val.length > 0) {
+    //            loadData();
+    //        }
+    //    });
+    //});
+</script>

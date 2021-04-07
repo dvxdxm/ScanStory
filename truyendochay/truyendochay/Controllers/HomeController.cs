@@ -67,12 +67,7 @@ namespace truyendochay.Controllers
             return View(model);
         }
 
-        [HttpGet("tim-kiem")]
-        public JsonResult Search(string textSearch = null)
-        {
-            var datas = _scanStoryService.Search(textSearch, pageIndex, 5);
-            return Json(datas);
-        }
+        
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         //public IActionResult Error()
         //{

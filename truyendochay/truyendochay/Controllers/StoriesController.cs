@@ -64,6 +64,7 @@ namespace truyendochay.Controllers
             // count all chapters
             var count = _scanStoryService.CountAllChapters(storyName: story.story_name);
             var psCount = count % page;
+            // Tổng số page
             model.PageCount = psCount == 0 ? count / page : (count / page) + 1; 
 
             model.ListStories = listStories.ConvertAll<CategoryViewModel>(s => s.Convert());
@@ -72,6 +73,14 @@ namespace truyendochay.Controllers
             model.LastChapters = lastChapters;
             model.Story = story;
             return View(model);
+        }
+
+        [HttpGet("{storyName}/trang-{pageIndex}")]
+        public JsonResult NextPage(string storyName, int pageIndex)
+        {
+            var story = _scanStoryService.GetStory(storyName);
+            var datas = _scanStoryService.GetChapterToStory(storyName: story.story_name, pageIndex, page);
+            return Json(datas);
         }
     }
 }

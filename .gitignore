@@ -21,9 +21,12 @@
 /eStoryContainer/.vs/eStoryContainer/DesignTimeBuild
 /eStoryContainer/eStoryContainer.Logging/bin/Debug/netcoreapp3.1
 /eStoryContainer/eStoryContainer.ApiController/obj
-/eStoryContainer/eStoryContainer.ApiController/bin/Debug/netcoreapp3.1
+/eStoryContainer/eStoryContainer.ApiController/bin
 eStoryContainer/eStoryContainer.Web/node_modules
 NewScanStory/node_modules
 eStoryContainer/.vs
 ScanStory/.idea
 ScanStory/Models/__pycache__/
+truyendochay/.vs/
+truyendochay/truyendochay/obj/
+truyendochay/truyendochay/obj/Debug/net5.0/truyendochay.csproj.FileListAbsolute.txt

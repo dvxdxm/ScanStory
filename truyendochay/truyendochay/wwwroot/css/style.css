@@ -7183,7 +7183,8 @@ h4,
         top: 13px;
     }
     .desc .desc-text.desc-text-full {
-        height: 304px;
+        /*height: 304px;*/
+        height: auto;
     }
     #truyen-slide .lazyimg {
         height: 245px;
