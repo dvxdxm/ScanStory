@@ -32,7 +32,7 @@
                                 <div class="navbar-logo w-2/12">
                                         <img class="h-9 bg-contain w-full" alt="Truyện đọc hay" src="./img/logo.png" />
                                 </div>
-                                <ul class="w-full">
+                                <ul class="w-full z-50">
                                         <li
                                                 class="group py-2 w-2/12 inline-block relative text-center hover:bg-gray-800 dark:hover:bg-gray-700">
                                                 <a href="javascript:void(0)" class="dropdown-toggle inline-flex"
@@ -455,20 +455,21 @@
                                 </form>
                         </div>
                 </div>
-                <div
-                        class="breadcrumb sm:block sm:w-full h-8 dark::border-t-0 border-t border-gray-300 dark:border-t dark:bg-gray-700 sm:inline-flex sm:items-center">
-                        <div
-                                class="sm:container whitespace-nowrap overflow-ellipsis overflow-hidden px-2 sm:px-0 h-8 sm:inline-flex items-center">
-                                Đọc truyện online, đọc
-                                truyện chữ,
-                                truyện full, truyện hay.
-                                Tổng hợp đầy đủ và cập nhật liên tục. </div>
+                <div class="breadcrumb sm:block sm:w-full h-8 dark:border-t-0 border-t border-b dark:border-b-0 border-gray-300 dark:border-t dark:bg-gray-700 sm:inline-flex sm:items-center">
+                        <div class="sm:container">
+                                <div
+                                        class="whitespace-nowrap overflow-ellipsis overflow-hidden px-2 sm:px-0 h-8 sm:inline-flex items-center">
+                                        Đọc truyện online, đọc
+                                        truyện chữ,
+                                        truyện full, truyện hay.
+                                        Tổng hợp đầy đủ và cập nhật liên tục. </div>
+                        </div>
                 </div>
         </header>
         <main id="main" class="mx-auto bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50">
                 <div class="sm:container" id="intro-index">
-                        <div class="title-list">
-                                <h2 class="text-2xl px-2 sm:px-0 sm:text-3xl font-medium inline">
+                        <div class="title-list border-b dark::border-b-0 mb-0 lg:mb-2 h-8 lg:h-10">
+                                <h2 class="text-2xl px-2 sm:px-0 sm:text-3xl font-medium inline border-b-2">
                                         <a href="https://truyenfull.vn/danh-sach/truyen-hot/" title="Truyện hot">Truyện
                                                 Hot
                                                 <svg class="fill-current h-8 w-8 sm:h-12 sm:w-12 inline text-gray-800 dark:text-gray-50 self-center text-4xl"
@@ -478,14 +479,13 @@
                                                 </svg>
                                         </a>
                                 </h2>
-
                                 <select id="hot-select"
-                                        class="bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 border"
+                                        class="bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 border float-right mt-2.5"
                                         aria-label="Chọn thể loại">
-                                        <option value="all">Tất cả</option>
-                                        <option value="1">Tiên Hiệp</option>
-                                        <option value="2">Kiếm Hiệp</option>
-                                        <option value="3">Ngôn Tình</option>
+                                        <option class="hover:bg-gray-800 dark:hover:bg-gray-700" value="all">Tất cả</option>
+                                        <option class="hover:bg-gray-800 dark:hover:bg-gray-700" value="1">Tiên Hiệp</option>
+                                        <option class="hover:bg-gray-800 dark:hover:bg-gray-700" value="2">Kiếm Hiệp</option>
+                                        <option class="hover:bg-gray-800 dark:hover:bg-gray-700" value="3">Ngôn Tình</option>
                                         <option value="4">Đô Thị</option>
                                         <option value="20">Quan Trường</option>
                                         <option value="6">Võng Du</option>
@@ -865,7 +865,8 @@
                                                                 title="Đô Thị">Đô
                                                                 Thị</a>, <a itemprop="genre"
                                                                 href="https://truyenfull.vn/the-loai/xuyen-khong/"
-                                                                title="Xuyên Không">Xuyên Không</a></div>
+                                                                title="Xuyên Không">Xuyên Không</a>
+                                                </div>
                                                 <div class="w-3/12 lg:w-2/12 col-chap text-info"><a
                                                                 href="https://truyenfull.vn/nhan-sinh-tu-do-min-bat-dau/chuong-519/"
                                                                 title="Nhân Sinh Từ Dò Mìn Bắt Đầu - Chương 519"><span
@@ -1492,6 +1493,295 @@
                                 </div>
                         </div>
                 </div>
+                <div class="sm:container" id="intro-index">
+                        <div class="title-list">
+                                <h2 class="text-2xl px-2 sm:px-0 sm:text-3xl font-medium inline">
+                                        <a href="https://truyenfull.vn/danh-sach/truyen-hot/" title="Truyện hot">Truyện
+                                                đã hoàn thành
+                                                <svg class="fill-current h-8 w-8 sm:h-12 sm:w-12 inline text-gray-800 dark:text-gray-50 self-center text-4xl"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                        <path
+                                                                d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z" />
+                                                </svg>
+                                        </a>
+                                </h2>
+
+                                <select id="hot-select"
+                                        class="bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 border float-right mt-2.5"
+                                        aria-label="Chọn thể loại">
+                                        <option value="all">Tất cả</option>
+                                        <option value="1">Tiên Hiệp</option>
+                                        <option value="2">Kiếm Hiệp</option>
+                                        <option value="3">Ngôn Tình</option>
+                                        <option value="4">Đô Thị</option>
+                                        <option value="20">Quan Trường</option>
+                                        <option value="6">Võng Du</option>
+                                        <option value="5">Khoa Huyễn</option>
+                                        <option value="39">Hệ Thống</option>
+                                        <option value="8">Huyền Huyễn</option>
+                                        <option value="7">Dị Giới</option>
+                                        <option value="19">Dị Năng</option>
+                                        <option value="10">Quân Sự</option>
+                                        <option value="11">Lịch Sử</option>
+                                        <option value="15">Xuyên Không</option>
+                                        <option value="38">Xuyên Nhanh</option>
+                                        <option value="17">Trọng Sinh</option>
+                                        <option value="18">Trinh Thám</option>
+                                        <option value="16">Thám Hiểm</option>
+                                        <option value="9">Linh Dị</option>
+                                        <option value="12">Sắc</option>
+                                        <option value="30">Ngược</option>
+                                        <option value="36">Sủng</option>
+                                        <option value="21">Cung Đấu</option>
+                                        <option value="22">Nữ Cường</option>
+                                        <option value="24">Gia Đấu</option>
+                                        <option value="23">Đông Phương</option>
+                                        <option value="13">Đam Mỹ</option>
+                                        <option value="14">Bách Hợp</option>
+                                        <option value="25">Hài Hước</option>
+                                        <option value="27">Điền Văn</option>
+                                        <option value="28">Cổ Đại</option>
+                                        <option value="29">Mạt Thế</option>
+                                        <option value="26">Truyện Teen</option>
+                                        <option value="32">Phương Tây</option>
+                                        <option value="33">Nữ Phụ</option>
+                                        <option value="34">Light Novel</option>
+                                        <option value="35">Việt Nam</option>
+                                        <option value="37">Đoản Văn</option>
+                                        <option value="31">Khác</option>
+                                </select>
+                        </div>
+
+                        <div class="grid grid-cols-4 sm:grid-cols-5 xl:grid-cols-10">
+                                <div class="mx-2 sm:mx-0 w-20 md:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/nhan-vat-phan-dien-tong-dang-hoai-nghi-nhan-sinh/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg"
+                                                        alt="Nhân Vật Phản Diện Tổng Đang Hoài Nghi Nhân Sinh"
+                                                        class="object-contain" itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Nhân Vật Phản Diện Tổng Đang Hoài Nghi Nhân
+                                                                Sinh</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 md:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/tu-tai-gia-tieu-kieu-nuong/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg" alt="Tú Tài Gia Tiểu Kiều Nương"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Tú Tài Gia Tiểu Kiều Nương</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 md:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/thap-nien-60-lam-giau-day-con/"
+                                                itemprop="url"><img src="./img/image1.jpg"
+                                                        alt="Thập Niên 60: Làm Giàu, Dạy Con" itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Thập Niên 60: Làm Giàu, Dạy Con</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 md:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/trong-sinh-tieu-dia-chu/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg" alt="Trọng Sinh Tiểu Địa Chủ"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Trọng Sinh Tiểu Địa Chủ</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 md:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/nhan-vat-phan-dien-tong-dang-hoai-nghi-nhan-sinh/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg"
+                                                        alt="Nhân Vật Phản Diện Tổng Đang Hoài Nghi Nhân Sinh"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Nhân Vật Phản Diện Tổng Đang Hoài Nghi Nhân
+                                                                Sinh</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/tu-tai-gia-tieu-kieu-nuong/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg" alt="Tú Tài Gia Tiểu Kiều Nương"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Tú Tài Gia Tiểu Kiều Nương</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/thap-nien-60-lam-giau-day-con/"
+                                                itemprop="url"><img src="./img/image1.jpg"
+                                                        alt="Thập Niên 60: Làm Giàu, Dạy Con" itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Thập Niên 60: Làm Giàu, Dạy Con</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/trong-sinh-tieu-dia-chu/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg" alt="Trọng Sinh Tiểu Địa Chủ"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Trọng Sinh Tiểu Địa Chủ</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/nhan-vat-phan-dien-tong-dang-hoai-nghi-nhan-sinh/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg"
+                                                        alt="Nhân Vật Phản Diện Tổng Đang Hoài Nghi Nhân Sinh"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Nhân Vật Phản Diện Tổng Đang Hoài Nghi Nhân
+                                                                Sinh</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/tu-tai-gia-tieu-kieu-nuong/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg" alt="Tú Tài Gia Tiểu Kiều Nương"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Tú Tài Gia Tiểu Kiều Nương</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/thap-nien-60-lam-giau-day-con/"
+                                                itemprop="url"><img src="./img/image1.jpg"
+                                                        alt="Thập Niên 60: Làm Giàu, Dạy Con" itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Thập Niên 60: Làm Giàu, Dạy Con</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/trong-sinh-tieu-dia-chu/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg" alt="Trọng Sinh Tiểu Địa Chủ"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Trọng Sinh Tiểu Địa Chủ</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/nhan-vat-phan-dien-tong-dang-hoai-nghi-nhan-sinh/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg"
+                                                        alt="Nhân Vật Phản Diện Tổng Đang Hoài Nghi Nhân Sinh"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Nhân Vật Phản Diện Tổng Đang Hoài Nghi Nhân
+                                                                Sinh</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/tu-tai-gia-tieu-kieu-nuong/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg" alt="Tú Tài Gia Tiểu Kiều Nương"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Tú Tài Gia Tiểu Kiều Nương</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/thap-nien-60-lam-giau-day-con/"
+                                                itemprop="url"><img src="./img/image1.jpg"
+                                                        alt="Thập Niên 60: Làm Giàu, Dạy Con" itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Thập Niên 60: Làm Giàu, Dạy Con</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/trong-sinh-tieu-dia-chu/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg" alt="Trọng Sinh Tiểu Địa Chủ"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Trọng Sinh Tiểu Địa Chủ</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/nhan-vat-phan-dien-tong-dang-hoai-nghi-nhan-sinh/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg"
+                                                        alt="Nhân Vật Phản Diện Tổng Đang Hoài Nghi Nhân Sinh"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Nhân Vật Phản Diện Tổng Đang Hoài Nghi Nhân
+                                                                Sinh</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/tu-tai-gia-tieu-kieu-nuong/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg" alt="Tú Tài Gia Tiểu Kiều Nương"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Tú Tài Gia Tiểu Kiều Nương</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/thap-nien-60-lam-giau-day-con/"
+                                                itemprop="url"><img src="./img/image1.jpg"
+                                                        alt="Thập Niên 60: Làm Giàu, Dạy Con" itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Thập Niên 60: Làm Giàu, Dạy Con</h3>
+                                                </div>
+                                        </a></div>
+                                <div class="mx-2 sm:mx-0 w-20 sm:w-28 mb-4 relative transform hover:scale-105"
+                                        itemscope="" itemtype="https://schema.org/Book"><a
+                                                href="https://truyenfull.vn/trong-sinh-tieu-dia-chu/"
+                                                itemprop="url"><span class="full-label"></span><img
+                                                        src="./img/image1.jpg" alt="Trọng Sinh Tiểu Địa Chủ"
+                                                        itemprop="image">
+                                                <div
+                                                        class="absolute w-full bottom-0 bg-gray-900 text-gray-50 dark:text-gray-50 bg-opacity-50 text-xs sm:text-sm py-1.5 text-center">
+                                                        <h3 itemprop="name">Trọng Sinh Tiểu Địa Chủ</h3>
+                                                </div>
+                                        </a></div>
+
+                        </div>
+
+                </div>
         </main>
         <footer id="footer" class="mx-auto bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-50">
                 <div class="container py-3">
@@ -1606,6 +1896,14 @@
 
                 .min-w-32 {
                         min-width: 11rem
+                }
+
+                ::-webkit-scrollbar {
+                        width: 6px;
+                }
+
+                ::-webkit-scrollbar-thumb {
+                        background-color: #111827;
                 }
         </style>
 </body>
