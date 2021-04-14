@@ -52,13 +52,33 @@ namespace eStoryContainer.Web.Controllers
                 }
             }
             var model = new HomePage() {
-                Stories = _storyService.GetList(pageIndex, 13),
+                //Stories = _storyService.SearchByGenre(null, pageIndex, 13),
                 Chapters = _chapterService.GetChapters(pageIndex, page),
                 CategoryStories = categories.ConvertAll<CategoryStoryViewModel>(s => s.Convert()),
-                NewChaptersUpdate = _chapterService.NewChaptersUpdate(pageIndex, page),
-                StoriesFull = _storyService.SearchTruyenFull(pageIndex, page)
+                //NewChaptersUpdate = _chapterService.NewChaptersUpdate(pageIndex, page),
+                StoriesFull = _storyService.SearchTruyenFull(pageIndex, 12)
             };
             return View(model);
+        }
+
+        [HttpGet("hot-stories")]
+        public async Task<IActionResult> HotStoryView(string catName = null)
+        {
+            var model = new HomePage()
+            {
+                Stories = _storyService.SearchByGenre(catName, pageIndex, 13)
+            };
+            return PartialView("_HotStoryPartial", model);
+        }
+
+        [HttpGet("stories-update")]
+        public async Task<IActionResult> StoriesUpdateView(string catName = null)
+        {
+            var model = new HomePage()
+            {
+                NewChaptersUpdate = _chapterService.NewChaptersUpdate(catName, pageIndex, page)
+            };
+            return PartialView("_StoriesUpdatePartial", model);
         }
 
         [HttpGet("tim-kiem")]

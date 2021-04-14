@@ -9,6 +9,7 @@ namespace eStoryContainer.Core.Interfaces
         Story GetBySlug(string slug);
         Story GetByName(string name);
         List<Story> GetList(int pageIndex, int page);
+        List<Story> SearchByGenre(string genre, int pageIndex, int page);
         List<Story> SearchByName(string textSearch, int pageIndex, int page);
         int CountAll();
         int CountBySearch(string textSearch);

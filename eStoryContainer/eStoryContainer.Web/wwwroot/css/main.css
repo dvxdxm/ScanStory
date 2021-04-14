@@ -6513,17 +6513,17 @@ img {
         border: 0
     }
 
-.list > .row {
+.list .row {
     display: table-row;
     font-family: 'Roboto Condensed',Tahoma,sans-serif;
     font-size: 15px
 }
 
-.col-truyen-side .list > .row {
+.col-truyen-side .list .row {
     background-color: #ecf0f1
 }
 
-.col-truyen-side .list.list-side > .row {
+.col-truyen-side .list.list-side .row {
     background-color: transparent
 }
 
@@ -6563,7 +6563,7 @@ span.glyphicon {
     border-bottom: 0
 }
 
-.list > .row > div {
+.list .row > div {
     height: 40px;
     line-height: 40px;
     border-left: 1px dashed #CCC;
@@ -6677,7 +6677,7 @@ a {
     padding-right: 10px
 }
 
-#list-page .col-truyen-side .list > .row > div {
+#list-page .col-truyen-side .list .row > div {
     height: 40px;
     line-height: 40px;
     text-align: left;
@@ -6732,7 +6732,7 @@ a {
         border: 1px solid #E7E7E7
     }
 
-.list > .row > div.more, .list > .row > div:first-child {
+.list > .row > div.more, .list .row > div:first-child {
     border-left: 0;
     padding-left: 0
 }
@@ -6813,13 +6813,13 @@ h3 {
             color: #FFF
         }
 
-        .list > .row > div, #truyen-slide .caption > h3, #truyen-slide .caption > small {
+        .list .row > div, #truyen-slide .caption > h3, #truyen-slide .caption > small {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis
         }
 
-.col-truyen-side .list > .row > div {
+.col-truyen-side .list .row > div {
     max-width: 270px;
     padding: 0
 }
@@ -8498,11 +8498,11 @@ a {
         border: inherit
     }
 
-        .dark-theme .list > .row, .dark-theme .col-truyen-side .list > .row {
+        .dark-theme .list .row, .dark-theme .col-truyen-side .list .row {
             background-color: inherit
         }
 
-            .dark-theme .list > .row:nth-child(2n), .dark-theme .col-truyen-side .list > .row:nth-child(2n) {
+            .dark-theme .list .row:nth-child(2n), .dark-theme .col-truyen-side .list .row:nth-child(2n) {
                 background-color: rgba(255,255,255,0.04)
             }
 
@@ -8512,7 +8512,7 @@ a {
         border: 0
     }
 
-    .dark-theme .list > .row > div, .dark-theme #list-page .list > .row > div {
+    .dark-theme .list .row > div, .dark-theme #list-page .list > .row > div {
         border-left: 0;
         border-bottom: 0
     }

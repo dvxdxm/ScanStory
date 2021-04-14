@@ -27,8 +27,18 @@ namespace eStoryContainer.Services.Chapters
             return _dbContext.Chapters.Where(book => true).Skip((pageIndex + 1) * page).Take(page).OrderByDescending(s => s.modified_on).ToList();
         }
 
-        public List<ChapterViewModel> NewChaptersUpdate(int pageIndex, int page)
+        public List<ChapterViewModel> NewChaptersUpdate(string catName, int pageIndex, int page)
         {
+            if (string.IsNullOrEmpty(catName))
+            {
+                var newChapters = _dbContext.Chapters.Where(chapter => true).DistinctBy(d => d.story_name).OrderByDescending(s => s.modified_on).Skip((pageIndex + 1) * page).Take(page).ToList();
+                foreach (var item in newChapters)
+                {
+                    item.Story = _storyService.GetByName(item.story_name);
+                }
+                return newChapters.Select(x => x.Convert()).ToList();
+            }
+            //TODO: chờ update của bot
             var chapters = _dbContext.Chapters.Where(chapter => true).DistinctBy(d => d.story_name).OrderByDescending(s => s.modified_on).Skip((pageIndex + 1) * page).Take(page).ToList();
 
             foreach (var item in chapters)

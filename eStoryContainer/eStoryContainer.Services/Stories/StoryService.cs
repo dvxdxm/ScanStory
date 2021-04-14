@@ -62,5 +62,14 @@ namespace eStoryContainer.Services.Stories
         {
             return _dbContext.Stories.Where(story => story.story_name == name).FirstOrDefault();
         }
+
+        public List<Story> SearchByGenre(string genre, int pageIndex, int page)
+        {
+            if(string.IsNullOrEmpty(genre))
+            {
+                return _dbContext.Stories.Where(st => true).OrderByDescending(s => s.modified_on).Skip((pageIndex + 1) * page).Take(page).ToList();
+            }
+            return _dbContext.Stories.Where(st => st.genre.Contains(genre)).OrderByDescending(s => s.modified_on).Skip((pageIndex + 1) * page).Take(page).ToList();
+        }
     }
 }

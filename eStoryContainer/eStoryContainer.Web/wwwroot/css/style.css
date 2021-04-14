@@ -6115,7 +6115,7 @@ h4,
     font-family: "Roboto Condensed", Tahoma, sans-serif;
     font-size: 15px;
 }
-.col-truyen-side .list > .row {
+.col-truyen-side .list .row {
     background-color: #ecf0f1;
 }
 .col-truyen-side .list.list-side > .row {
@@ -6368,7 +6368,7 @@ h4,
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.col-truyen-side .list > .row > div {
+.col-truyen-side .list .row > div {
     max-width: 270px;
     padding: 0;
 }
