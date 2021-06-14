@@ -17,7 +17,7 @@ def response_list_chapters(response, story_name, sort):
 
         for link_url in list_urls_chapter:
             sort += 1
-            print(f"Count item: {sort}")
+            # print(f"Count item: {sort}")
             yield request_get_content_of_chapter(link_url, story_name, sort)
 
 
@@ -39,7 +39,14 @@ def get_content_chapter(response, story_name, sort):
     chapter_title = response.xpath('//a[contains(@class, "chapter-title")]/@title').get()
     text_replace = story_name + " - "
     text_after_replace = chapter_title.replace(f"{text_replace}", "")
-
+    index_number_chapter = text_after_replace.index(":", 0)
+    # print(f"Index : {index_number_chapter}")
+    page_title_sort = text_after_replace[:index_number_chapter]
+    # print(f"Chương : {page_title_sort}")
+    sort_new_value = page_title_sort.replace('Chương ', '')
+    # print(f"Count Item: {sort_new_value}")
+    # if sort_new_value is None:
+    #     sort_new_value
     item['content'] = content
     item["collection_name"] = 'chapter'
     item["chapter_title"] = text_after_replace
@@ -49,7 +56,7 @@ def get_content_chapter(response, story_name, sort):
     item['modified_on'] = datetime.datetime.now()
     item['modified_by'] = "admin"
     item['story_id'] = ""
-    item['sort_number'] = sort
+    item['sort_number'] = int(sort_new_value)
     item["slug"] = slugify(text_after_replace).lower()
     yield item
 
@@ -136,7 +143,7 @@ class TienHiep(scrapy.Spider):
     # FOLDER = Path(__file__).absolute().parent.parent.parent
     # my_file = os.path.join(FOLDER, 'assets\TienHiep')
     the_loai = 'Tiên Hiệp'
-
+    #
     # with open(my_file) as json_file:
     #    data = json.load(json_file)
     #    start_urls = data['CategoryUrls']
