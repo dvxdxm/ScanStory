@@ -93,8 +93,11 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 #MONGODB_SERVER = "localhost"
-MONGO_URI = "localhost"
+MONGO_URI = "localhost" #"45.77.247.179" #localhost
 MONGODB_PORT = 27017
 #MONGODB_DB = "scanstory"
 MONGO_DATABASE = "scanstory"
+# MONGO_USER = "sysadmin"
+# MONGO_PASSWORD = "abc@123456"
 # MONGODB_COLLECTION = "scanstory"
+# Connection server: mongodb://45.77.247.179:27017/scanstory

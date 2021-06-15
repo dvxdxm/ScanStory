@@ -1,11 +1,9 @@
 import datetime
-import json
-import os
-from pathlib import Path
 import scrapy
 from ScanStory.Models.Story import Story
 from ScanStory.Models.Chapter import Chapter
 from slugify import slugify
+
 
 def download_image_to_link(link):
     yield scrapy.Request(link)
@@ -139,14 +137,7 @@ class TienHiep(scrapy.Spider):
     name = 'tienhiep'
     allowed_domains = ['truyenfull.vn']
     start_urls = ['https://truyenfull.vn/the-loai/tien-hiep/']
-    # links = []
-    # FOLDER = Path(__file__).absolute().parent.parent.parent
-    # my_file = os.path.join(FOLDER, 'assets\TienHiep')
     the_loai = 'Tiên Hiệp'
-    #
-    # with open(my_file) as json_file:
-    #    data = json.load(json_file)
-    #    start_urls = data['CategoryUrls']
 
     def parse(self, response):
         last_page_text = response.xpath(
