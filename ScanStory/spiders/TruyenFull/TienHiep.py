@@ -56,6 +56,7 @@ def get_content_chapter(response, story_name, sort):
     item['story_id'] = ""
     item['sort_number'] = int(sort_new_value)
     item["slug"] = slugify(text_after_replace).lower()
+    item["dealer_id"] = '08d92f17-4e75-4be2-84ba-522e9cc87468'
     yield item
 
 
@@ -122,6 +123,7 @@ def get_content_story_to_url(response, link):
     item["keywords"] = keywords
     item["description_seo"] = description_seo
     item["slug"] = slugify(story_name).lower()
+    item["dealer_id"] = '08d92f17-4e75-4be2-84ba-522e9cc87468'
     yield item
 
 
