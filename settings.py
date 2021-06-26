@@ -11,8 +11,8 @@
 
 BOT_NAME = 'ScanStory'
 
-SPIDER_MODULES = ['ScanStory.spiders']
-NEWSPIDER_MODULE = 'ScanStory.spiders'
+SPIDER_MODULES = ['spiders']
+NEWSPIDER_MODULE = 'spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -67,7 +67,7 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
     # 'ScanStory.pipelines.ScanstoryPipeline': 300,
     # 'scrapy.pipelines.images.ImagesPipeline': 1,
-    'ScanStory.pipelines.MongoPipeline': 300,
+    'pipelines.MongoPipeline': 300,
     # 'stack.pipelines.MongoDBPipeline': 300
 }
 # IMAGES_STORE = '../scanstory/assets/img/'

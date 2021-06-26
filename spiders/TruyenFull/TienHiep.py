@@ -1,7 +1,7 @@
 import datetime
 import scrapy
-from ScanStory.Models.Story import Story
-from ScanStory.Models.Chapter import Chapter
+from Models.Story import Story
+from Models.Chapter import Chapter
 from slugify import slugify
 
 
